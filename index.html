@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembelajaran Mendalam - Bab 1</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom right, #e0f7fa, #bbdefb, #e1bee7); /* Soft gradient background */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Hide overflow for flying butterflies */
+        }
+        .presentation-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 2rem; /* More rounded corners */
+            max-width: 900px;
+            width: 95%;
+            padding: 2.5rem;
+            text-align: center;
+            position: relative;
+            z-index: 10; /* Ensure content is above butterflies */
+        }
+        .slide {
+            display: none;
+            animation: fadeIn 0.8s ease-out;
+        }
+        .slide.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .nav-button {
+            background-color: #81c784; /* Green button */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px; /* Pill shape */
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: none;
+            cursor: pointer;
+        }
+        .nav-button:hover {
+            background-color: #66bb6a; /* Darker green on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+        .nav-button:disabled {
+            background-color: #bdbdbd; /* Grey when disabled */
+            cursor: not-allowed;
+            transform: translateY(0);
+            box-shadow: none;
+        }
+        h1 {
+            color: #424242; /* Dark grey for headings */
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        h2 {
+            color: #616161; /* Slightly lighter grey for subheadings */
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        h3 {
+            color: #757575;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            text-align: left;
+        }
+        p, ul {
+            color: #424242;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            text-align: left;
+            margin-bottom: 1rem;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Butterfly animation */
+        .butterfly-svg {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            opacity: 0.7;
+            animation: fly linear infinite;
+            z-index: 5; /* Below content */
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translate(calc(var(--start-x) * 1vw), calc(var(--start-y) * 1vh)) rotate(0deg);
+            }
+            25% {
+                transform: translate(calc(var(--start-x) * 1vw + var(--dx1) * 100px), calc(var(--start-y) * 1vh + var(--dy1) * 100px)) rotate(calc(var(--rot1) * 1deg));
+            }
+            50% {
+                transform: translate(calc(var(--start-x) * 1vw + var(--dx2) * 100px), calc(var(--start-y) * 1vh + var(--dy2) * 100px)) rotate(calc(var(--rot2) * 1deg));
+            }
+            75% {
+                transform: translate(calc(var(--start-x) * 1vw + var(--dx3) * 100px), calc(var(--start-y) * 1vh + var(--dy3) * 100px)) rotate(calc(var(--rot3) * 1deg));
+            }
+            100% {
+                transform: translate(calc(var(--start-x) * 1vw), calc(var(--start-y) * 1vh)) rotate(0deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-8 text-pink-600">Pembelajaran Mendalam</h1>
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold mb-8 text-purple-700">Menuju Pendidikan Bermutu untuk Semua</h2>
+
+        <!-- Slide 1: Judul -->
+        <div id="slide-0" class="slide active">
+            <h3 class="text-2xl text-blue-700">Bab I: Pendahuluan</h3>
+            <p>Selamat datang di presentasi interaktif tentang Bab I Naskah Akademik "Pembelajaran Mendalam". Mari kita jelajahi tantangan dan tujuan pendidikan di Indonesia!</p>
+            <p class="mt-4 text-gray-600 italic">Klik "Lanjut" untuk memulai!</p>
+        </div>
+
+        <!-- Slide 2: Latar Belakang (1/3) -->
+        <div id="slide-1" class="slide">
+            <h3 class="text-2xl text-blue-700">A. Latar Belakang: Tantangan Pendidikan Indonesia (1/3)</h3>
+            <ul>
+                <li>**Kompleksitas Masa Depan:** Indonesia menghadapi tantangan yang kompleks, dinamis, tidak pasti, dan ambigu, dipengaruhi oleh perkembangan IPTEK. Masyarakat juga semakin beragam dan rentan konflik.</li>
+                <li>**Persiapan Peserta Didik:** Pendidikan harus menyiapkan peserta didik agar mandiri, mampu menghadapi tantangan, mengatasi rintangan, dan menjadi agen perubahan.</li>
+                <li>**Karakter yang Dibutuhkan:** Generasi muda perlu dididik agar ulet, memiliki daya tahan tinggi, adaptif, serta memiliki pola pikir bertumbuh (growth mindset).</li>
+            </ul>
+        </div>
+
+        <!-- Slide 3: Latar Belakang (2/3) -->
+        <div id="slide-2" class="slide">
+            <h3 class="text-2xl text-blue-700">A. Latar Belakang: Kualitas Pendidikan yang Belum Merata (2/3)</h3>
+            <ul>
+                <li>**Akses vs. Kualitas:** Akses pendidikan dasar dan menengah sudah baik, namun kualitasnya masih menjadi persoalan.</li>
+                <li>**Rendahnya Skor PISA:** Skor literasi membaca dan numerasi peserta didik Indonesia masih di bawah rata-rata internasional (PISA 2023).</li>
+                <li>**Kesenjangan Efektivitas Pembelajaran:** Disebabkan oleh metode tradisional, asesmen hafalan, dan kurangnya pengembangan kreativitas serta berpikir kritis.</li>
+            </ul>
+        </div>
+
+        <!-- Slide 4: Latar Belakang (3/3) -->
+        <div id="slide-3" class="slide">
+            <h3 class="text-2xl text-blue-700">A. Latar Belakang: Urgensi Pembelajaran Mendalam (PM) (3/3)</h3>
+            <ul>
+                <li>**Fenomena "Bersekolah tetapi Tidak Belajar":** Kondisi pembelajaran yang belum maksimal berdampak pada kualitas pendidikan.</li>
+                <li>**Potensi Indonesia:** Keberagaman budaya dan bahasa, kearifan lokal, serta teknologi menjadi modal berharga.</li>
+                <li>**Bonus Demografi 2035 & Visi Indonesia Emas 2045:** Pendidikan sangat strategis untuk menyiapkan tenaga kerja yang kompeten, kreatif, dan adaptif.</li>
+                <li>**Deep Learning sebagai Solusi:** Diperlukan inisiatif melalui pendekatan "Deep Learning" atau Pembelajaran Mendalam (PM) untuk mengakselerasi dampak pendidikan.</li>
+            </ul>
+        </div>
+
+        <!-- Slide 5: Tujuan -->
+        <div id="slide-4" class="slide">
+            <h3 class="text-2xl text-blue-700">B. Tujuan Penyusunan Naskah Akademik PM</h3>
+            <ul>
+                <li>**Landasan Kebijakan:** Memberikan landasan bagi pengambilan kebijakan Kemendikdasmen terkait penerapan PM.</li>
+                <li>**Acuan Pengembangan Program:** Menyediakan acuan bagi pengembangan program dan kegiatan untuk memastikan ketersediaan dan kecukupan sumber daya serta infrastruktur.</li>
+                <li>**Deskripsi Kerangka Kerja:** Mendeskripsikan kerangka kerja strategis implementasi PM, meliputi kerangka waktu dan distribusi tugas fungsi unit utama.</li>
+            </ul>
+        </div>
+
+        <!-- Slide 6: Ruang Lingkup -->
+        <div id="slide-5" class="slide">
+            <h3 class="text-2xl text-blue-700">C. Ruang Lingkup Naskah Akademik PM</h3>
+            <ul>
+                <li>**Konsep Akademik PM:** Membahas konsep akademik Pembelajaran Mendalam dengan prinsip berkesadaran (mindful), bermakna (meaningful), dan menggembirakan (joyful).</li>
+                <li>**Faktor Pendukung:** Mengidentifikasi faktor pendukung yang perlu dipersiapkan untuk menerapkan PM pada jenjang PAUD, pendidikan dasar, dan pendidikan menengah (infrastruktur, SDM, kebijakan).</li>
+            </ul>
+        </div>
+
+        <!-- Slide 7: Penutup -->
+        <div id="slide-6" class="slide">
+            <h3 class="text-2xl text-blue-700">Terima Kasih!</h3>
+            <p>Semoga presentasi ini memberikan gambaran yang jelas tentang pentingnya Pembelajaran Mendalam untuk masa depan pendidikan Indonesia.</p>
+            <p class="mt-4 text-gray-600 italic">Anda telah mencapai akhir presentasi Bab 1!</p>
+        </div>
+
+        <div class="flex justify-between mt-8">
+            <button id="prevBtn" class="nav-button">Sebelumnya</button>
+            <button id="nextBtn" class="nav-button">Lanjut</button>
+        </div>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+            updateNavButtons();
+        }
+
+        function updateNavButtons() {
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === slides.length - 1;
+            nextBtn.textContent = currentSlide === slides.length - 1 ? 'Selesai' : 'Lanjut';
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            } else if (currentSlide === slides.length - 1) {
+                // Optionally, do something when "Selesai" is clicked, e.g., show a final message or reset.
+                alert('Presentasi telah selesai!'); // Using alert for simplicity, but a custom modal is better for production.
+            }
+        });
+
+        // Initial display
+        showSlide(currentSlide);
+
+        // --- Butterfly Animation ---
+        const numButterflies = 8; // Number of butterflies
+        const butterflyColors = ['#ffccbc', '#d1c4e9', '#c8e6c9', '#fff9c4', '#ffecb3']; // Pastel colors
+
+        for (let i = 0; i < numButterflies; i++) {
+            const butterfly = document.createElement('div');
+            butterfly.classList.add('butterfly-svg');
+
+            // Random start position (outside viewport)
+            const startX = Math.random() * 100; // 0-100vw
+            const startY = Math.random() * 100; // 0-100vh
+            const duration = 15 + Math.random() * 10; // 15-25 seconds
+            const delay = Math.random() * 5; // 0-5 seconds delay
+            const size = 30 + Math.random() * 20; // 30-50px
+
+            // Random movement parameters
+            const dx1 = (Math.random() - 0.5) * 5;
+            const dy1 = (Math.random() - 0.5) * 5;
+            const rot1 = (Math.random() - 0.5) * 90;
+
+            const dx2 = (Math.random() - 0.5) * 5;
+            const dy2 = (Math.random() - 0.5) * 5;
+            const rot2 = (Math.random() - 0.5) * 90;
+
+            const dx3 = (Math.random() - 0.5) * 5;
+            const dy3 = (Math.random() - 0.5) * 5;
+            const rot3 = (Math.random() - 0.5) * 90;
+
+            const color = butterflyColors[Math.floor(Math.random() * butterflyColors.length)];
+
+            butterfly.style.setProperty('--start-x', startX);
+            butterfly.style.setProperty('--start-y', startY);
+            butterfly.style.setProperty('--dx1', dx1);
+            butterfly.style.setProperty('--dy1', dy1);
+            butterfly.style.setProperty('--rot1', rot1);
+            butterfly.style.setProperty('--dx2', dx2);
+            butterfly.style.setProperty('--dy2', dy2);
+            butterfly.style.setProperty('--rot2', rot2);
+            butterfly.style.setProperty('--dx3', dx3);
+            butterfly.style.setProperty('--dy3', dy3);
+            butterfly.style.setProperty('--rot3', rot3);
+            butterfly.style.animationDuration = `${duration}s`;
+            butterfly.style.animationDelay = `${delay}s`;
+            butterfly.style.width = `${size}px`;
+            butterfly.style.height = `${size}px`;
+
+            // Simple butterfly SVG (could be more complex for better visuals)
+            butterfly.innerHTML = `
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="${color}" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                    <path d="M12 11.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm-4.5 1.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm9 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                    <path d="M12 4c-3.31 0-6 2.69-6 6h12c0-3.31-2.69-6-6-6z"/>
+                </svg>
+            `;
+            document.body.appendChild(butterfly);
+        }
+    </script>
+</body>
+</html>
