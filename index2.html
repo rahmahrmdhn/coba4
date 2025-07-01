@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dimensi Profil Lulusan Pembelajaran Mendalam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Keyframes untuk animasi melayang */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Keyframes untuk animasi pergerakan background */
+        @keyframes backgroundPan {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+        /* Keyframes untuk animasi fade-in pada header */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            /* Gradien radial pink yang cerah dan dinamis */
+            background: radial-gradient(circle at top left, #ffdde1, #ffafbd),
+                        radial-gradient(circle at bottom right, #ffafbd, #ffc3a0);
+            background-size: 200% 200%;
+            animation: backgroundPan 20s ease infinite alternate; /* Animasi pergerakan background lebih lambat */
+            color: #4a148c; /* Warna teks ungu gelap untuk kontras */
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 60px auto; /* Margin lebih besar */
+            padding: 50px;
+            background-color: rgba(255, 255, 255, 0.98);
+            border-radius: 40px; /* Sudut sangat bulat */
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3); /* Bayangan lebih dalam */
+            border: 5px solid #f8bbd0; /* Border pink yang lebih tebal */
+            position: relative;
+            z-index: 10;
+            overflow: hidden; /* Pastikan bayangan internal tidak keluar */
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header h1 {
+            font-size: 4rem; /* Ukuran judul sangat besar */
+            font-weight: 800;
+            color: #e91e63; /* Pink cerah untuk judul */
+            margin-bottom: 20px;
+            text-shadow: 5px 5px 10px rgba(233, 30, 99, 0.3); /* Bayangan teks pink */
+            letter-spacing: 2px;
+        }
+        .header p {
+            font-size: 1.5rem; /* Ukuran sub-judul lebih besar */
+            color: #ad1457; /* Pink gelap untuk sub-judul */
+            font-weight: 700;
+        }
+
+        .dimension-card {
+            background: linear-gradient(160deg, #ffebee 10%, #fce4ec 90%); /* Gradien pink pada kartu */
+            padding: 30px;
+            border-radius: 25px; /* Sudut kartu lebih bulat */
+            margin-bottom: 25px;
+            border: 3px solid #f48fb1; /* Border pink yang jelas */
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            cursor: pointer; /* Menunjukkan bahwa kartu bisa diklik */
+            overflow: hidden; /* Untuk efek transisi konten */
+        }
+        .dimension-card:hover {
+            transform: translateY(-15px) scale(1.04) rotate(-0.5deg); /* Efek hover lebih dramatis */
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4); /* Bayangan sangat menonjol */
+            background: linear-gradient(160deg, #f8bbd0 10%, #f48fb1 90%); /* Warna hover yang lebih intens */
+            border-color: #c2185b; /* Border pink yang lebih gelap saat hover */
+        }
+
+        .dimension-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Untuk menempatkan ikon panah di kanan */
+            padding-bottom: 15px; /* Jarak antara header dan konten */
+            border-bottom: 2px dashed #fce4ec; /* Garis putus-putus lucu */
+            margin-bottom: 15px;
+        }
+
+        .dimension-card-header h2 {
+            font-size: 2.2rem; /* Ukuran judul dimensi sangat besar */
+            font-weight: 800;
+            color: #880e4f; /* Pink sangat gelap untuk judul kartu */
+            display: flex;
+            align-items: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+        }
+        .dimension-card-header h2 span {
+            margin-right: 20px; /* Jarak antara emoji dan teks lebih besar */
+            font-size: 2em; /* Ukuran emoji sangat besar */
+            line-height: 1;
+            filter: drop-shadow(3px 3px 5px rgba(0,0,0,0.2)); /* Bayangan pada emoji lebih kuat */
+        }
+
+        .toggle-icon {
+            font-size: 2rem;
+            color: #e91e63; /* Warna pink untuk ikon panah */
+            transition: transform 0.3s ease-in-out;
+        }
+        .dimension-card.expanded .toggle-icon {
+            transform: rotate(180deg); /* Putar panah saat dibuka */
+        }
+
+        .dimension-card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            opacity: 0;
+            color: #c2185b; /* Warna pink gelap untuk teks konten */
+            font-size: 1.15rem;
+        }
+
+        .dimension-card.expanded .dimension-card-content {
+            max-height: 500px; /* Cukup tinggi untuk konten, bisa disesuaikan */
+            opacity: 1;
+            padding-top: 10px; /* Padding setelah dibuka */
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 70px;
+            font-size: 1.2rem;
+            color: #d81b60; /* Pink gelap untuk footer */
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+            font-weight: 700;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px auto;
+                padding: 25px;
+                border-radius: 25px;
+            }
+            .header h1 {
+                font-size: 2.8rem;
+                letter-spacing: 1px;
+            }
+            .header p {
+                font-size: 1.2rem;
+            }
+            .dimension-card-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .dimension-card-header h2 {
+                font-size: 1.8rem;
+                margin-bottom: 10px;
+            }
+            .dimension-card-header h2 span {
+                margin-right: 10px;
+                font-size: 1.5em;
+            }
+            .toggle-icon {
+                align-self: flex-end; /* Pindahkan ikon panah ke kanan bawah di mobile */
+                margin-top: -30px; /* Sesuaikan posisi */
+            }
+            .dimension-card-content p {
+                font-size: 1rem;
+            }
+            .footer {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>💖 Dimensi Profil Lulusan Pembelajaran Mendalam 💖</h1>
+            <p>Mencetak Generasi Unggul yang Cerdas, Ceria, & Penuh Warna untuk Masa Depan!</p>
+        </header>
+
+        <main>
+            <!-- Dimensi 1: Keimanan dan Ketakwaan terhadap Tuhan YME -->
+            <div class="dimension-card" data-dimension="keimanan">
+                <div class="dimension-card-header">
+                    <h2><span>🙏</span>Keimanan dan Ketakwaan terhadap Tuhan YME</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="dimension-card-content">
+                    <p>Individu yang memiliki keyakinan teguh akan keberadaan Tuhan serta menghayati nilai-nilai spiritual dalam kehidupan sehari-hari. Nilai ini tercermin dalam perilaku berakhlak mulia, penuh kasih, dan bertanggung jawab dalam menjalankan tugas dan kewajiban. Dimensi ini menekankan keseimbangan antara pengetahuan, moralitas, dan hubungan harmonis dengan Tuhan, sesama manusia, dan lingkungan.</p>
+                </div>
+            </div>
+
+            <!-- Dimensi 2: Kewargaan -->
+            <div class="dimension-card" data-dimension="kewargaan">
+                <div class="dimension-card-header">
+                    <h2><span>🌎</span>Kewargaan</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="dimension-card-content">
+                    <p>Individu yang memiliki rasa cinta tanah air, menaati aturan dan norma sosial, memiliki kepedulian, tanggung jawab sosial, serta berkomitmen untuk menyelesaikan masalah nyata terkait keberlanjutan manusia dan lingkungan. Fokusnya adalah kesadaran peserta didik untuk berkontribusi terhadap kebaikan bersama sebagai warga negara dan warga dunia.</p>
+                </div>
+            </div>
+
+            <!-- Dimensi 3: Penalaran Kritis -->
+            <div class="dimension-card" data-dimension="penalaran-kritis">
+                <div class="dimension-card-header">
+                    <h2><span>🧠</span>Penalaran Kritis</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="dimension-card-content">
+                    <p>Individu yang mampu berpikir secara logis, analitis, dan reflektif dalam memahami, mengevaluasi, serta memproses informasi. Peserta didik memiliki keterampilan untuk menganalisis masalah, mengevaluasi argumen, menghubungkan gagasan yang relevan, dan merefleksikan proses berpikir dalam pengambilan keputusan.</p>
+                </div>
+            </div>
+
+            <!-- Dimensi 4: Kreativitas -->
+            <div class="dimension-card" data-dimension="kreativitas">
+                <div class="dimension-card-header">
+                    <h2><span>✨</span>Kreativitas</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="dimension-card-content">
+                    <p>Individu yang mampu berpikir secara inovatif, fleksibel, dan orisinal dalam mengolah ide atau informasi untuk menciptakan solusi yang unik dan bermanfaat. Mereka dapat melihat masalah dari berbagai sudut pandang, menghasilkan banyak gagasan, serta menemukan dan mengembangkan alternatif solusi yang efektif.</p>
+                </div>
+            </div>
+
+            <!-- Dimensi 5: Kolaborasi -->
+            <div class="dimension-card" data-dimension="kolaborasi">
+                <div class="dimension-card-header">
+                    <h2><span>🤝</span>Kolaborasi</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="dimension-card-content">
+                    <p>Individu yang mampu bekerja sama secara efektif dengan orang lain secara gotong royong untuk mencapai tujuan bersama melalui pembagian peran dan tanggung jawab. Mereka menjalin hubungan yang kuat, menghargai kontribusi setiap anggota tim, serta menunjukkan sikap saling menghormati meskipun terdapat perbedaan pendapat atau latar belakang.</p>
+                </div>
+            </div>
+
+            <!-- Dimensi 6: Kemandirian -->
+            <div class="dimension-card" data-dimension="kemandirian">
+                <div class="dimension-card-header">
+                    <h2><span>🌟</span>Kemandirian</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="dimension-card-content">
+                    <p>Peserta didik mampu bertanggung jawab atas proses dan hasil belajarnya sendiri dengan menunjukkan kemampuan untuk mengambil inisiatif, mengatasi hambatan, dan menyelesaikan tugas secara tepat tanpa bergantung pada orang lain. Mereka memiliki kebebasan dalam menentukan pilihan, menguasai dirinya, serta gigih dalam berusaha untuk mencapai tujuan.</p>
+                </div>
+            </div>
+
+            <!-- Dimensi 7: Kesehatan -->
+            <div class="dimension-card" data-dimension="kesehatan">
+                <div class="dimension-card-header">
+                    <h2><span>🌸</span>Kesehatan</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="dimension-card-content">
+                    <p>Menggambarkan peserta didik yang sehat jasmani sebagai individu yang menjalankan kebiasaan hidup sehat, memiliki fisik yang prima, bugar, sehat, dan mampu menjaga keseimbangan kesehatan mental dan fisik untuk mewujudkan kesejahteraan lahir dan batin (well-being).</p>
+                </div>
+            </div>
+
+            <!-- Dimensi 8: Komunikasi -->
+            <div class="dimension-card" data-dimension="komunikasi">
+                <div class="dimension-card-header">
+                    <h2><span>💬</span>Komunikasi</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="dimension-card-content">
+                    <p>Peserta didik memiliki kemampuan komunikasi yang baik untuk menyampaikan ide, gagasan, dan informasi dengan jelas serta berinteraksi secara efektif dalam berbagai situasi. Profil ini memungkinkan peserta didik mampu berinteraksi dengan orang lain, berbagi serta mempertahankan pendapat, menyampaikan sudut pandang yang beragam, dan aktif terlibat dalam kegiatan yang membutuhkan interaksi dua arah.</p>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>Dibuat dengan 💖 untuk Pendidikan Bermutu!</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dimensionCards = document.querySelectorAll('.dimension-card');
+
+            dimensionCards.forEach(card => {
+                const header = card.querySelector('.dimension-card-header');
+                const content = card.querySelector('.dimension-card-content');
+                const toggleIcon = card.querySelector('.toggle-icon');
+
+                header.addEventListener('click', () => {
+                    card.classList.toggle('expanded');
+                    if (card.classList.contains('expanded')) {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        toggleIcon.textContent = '▲'; // Panah ke atas saat terbuka
+                    } else {
+                        content.style.maxHeight = "0";
+                        toggleIcon.textContent = '▼'; // Panah ke bawah saat tertutup
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
